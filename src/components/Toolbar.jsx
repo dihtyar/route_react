@@ -11,7 +11,7 @@ function Toolbar({ user }) {
                 
                 <section className="mdc-toolbar__section mdc-toolbar__section--align-end">
                     <nav className="mdc-tab-bar">
-                        <NavLink exact to="/" className="mdc-tab" activeStyle={{ color: 'orange' }}>Главная</NavLink>
+                        <NavLink exact to="/" className="mdc-tab" activeClassName="mdc-tab--active">Главная</NavLink>
                         <NavLink to="/about" className="mdc-tab" activeClassName="mdc-tab--active">О проекте</NavLink>
                         <NavLink to="/books" className="mdc-tab" activeClassName="mdc-tab--active">Книги</NavLink>
                         {user ?
