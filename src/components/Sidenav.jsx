@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {NavLink} from 'react-router-dom';
 import topics from '../data/topics';
 
 function Sidenav() {
@@ -7,13 +7,15 @@ function Sidenav() {
         <aside className="mdc-permanent-drawer">
             <nav className="mdc-list mdc-list--avatar-list">
                 {topics.map(topic => 
-                    <a
+                    <NavLink
                         key={topic.id}
-                        href={`/books/${topic.id}`}
-                        className="mdc-list-item">
+                        to={`/books/${topic.id}`}
+                        className="mdc-list-item"
+                        activeclassName="mdc-temporary-drawer--selected"
+                    >
                         <img src={`/img/topics/${topic.id}.svg`} className="mdc-list-item__start-detail"/>
                             {topic.title}
-                    </a>
+                    </NavLink>
                 )}
             </nav>
         </aside>
