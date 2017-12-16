@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
 import Toolbar from './components/Toolbar';
 import Content from './components/Content';
@@ -18,35 +18,33 @@ class App extends Component {
         user: null
     }
     login = user => {
-        this.setState({user});
+        this.setState({user}, () => this.props.history.push('/books'));
         // go to /books
     }
     logout = () => {
-        this.setState({user:null});
+        this.setState({user:null}, () => this.props.history.push('/'));
         // go to /
     }
     render() {
         return (
-            <Router>
-                <div className="app">
-                    <Toolbar />
+            <div className="app">
+                <Toolbar user={this.state.user} />
 
-                    <Content>
-                        <Route path="/books" render={() => <Sidenav topics={this.props.topics} />} />
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/about" component={About} />
-                            <Route path="/login" render={props => <Login onLogin = {this.login} />} />
-                            <Route path="/logout" render={props => <Logout onLogout = {this.logout} />} />
-                            <PrivateRoute exact path="/books/:topic?" user={this.state.user} component={Books} data={this.props.books}/>
-                            <PrivateRoute path="/books/:topic/:book" user={this.state.user}  component={Books} data={this.props.books}/>
-                            <Route component={NotFound} />
-                        </Switch>
-                    </Content>
-                </div>
-            </Router>
+                <Content>
+                    <Route path="/books" render={() => <Sidenav topics={this.props.topics} />} />
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/about" component={About} />
+                        <Route path="/login" render={props => <Login onLogin = {this.login} />} />
+                        <Route path="/logout" render={props => <Logout onLogout = {this.logout} />} />
+                        <PrivateRoute exact path="/books/:topic?" user={this.state.user} component={Books} data={this.props.books}/>
+                        <PrivateRoute path="/books/:topic/:book" user={this.state.user}  component={Book} data={this.props.books}/>
+                        <Route component={NotFound} />
+                    </Switch>
+                </Content>
+            </div>
         );
     }
 }
 
-export default App;
+export default withRouter(App);
