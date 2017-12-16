@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import topics from '../data/topics';
 
-function Sidenav() {
+
+function Sidenav({topics}) {
     return (
         <aside className="mdc-permanent-drawer">
             <nav className="mdc-list mdc-list--avatar-list">

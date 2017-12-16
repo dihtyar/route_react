@@ -1,11 +1,6 @@
 import React from 'react';
-
-import books from '../data/books';
-
-function Book({match}) {
-
-    const book = books.find(book => book.slug === match.params.book);
-
+function Book({match, data}) {
+    const book = data.find(book => book.slug === match.params.book);
     return (
         <main id="book">
             <div className="mdc-card">
